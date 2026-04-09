@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RedBid</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>🔥 RedBid Аукцион</header>
+
+<div class="container">
+
+<form action="/add" method="post">
+    <input name="name" placeholder="Название" required>
+    <input name="price" type="number" placeholder="Старт цена" required>
+    <button>Добавить</button>
+</form>
+
+<hr>
+
+{% for item in items %}
+<div class="card">
+    <h2>{{ item.name }}</h2>
+    <p>💰 Текущая цена: {{ item.price }} тг</p>
+
+    <form action="/bid/{{ item.id }}" method="post">
+        <input name="price" type="number" placeholder="Ваша ставка">
+        <button>Сделать ставку</button>
+    </form>
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>
